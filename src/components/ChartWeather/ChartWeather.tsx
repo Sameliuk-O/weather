@@ -1,4 +1,5 @@
 import React from 'react';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,10 +12,20 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, Filler);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Tooltip,
+  Legend,
+  Filler,
+  ChartDataLabels,
+);
 
 const options = {
   responsive: true,
+  maintainAspectRatio: false,
   title: {
     display: false,
   },
@@ -43,7 +54,10 @@ const options = {
       },
       ticks: {
         display: false,
+        maxRotation: 0,
       },
+      stepSize: 0,
+      suggestedMin: 0,
     },
   },
   point: {
@@ -53,8 +67,17 @@ const options = {
     legend: {
       display: false,
     },
+    datalabels: {
+      display: true,
+      color: 'rgba(197, 197, 197)',
+      anchor: 'end',
+      align: 'top',
+      offset: -1,
+      font: {
+        size: 10,
+      },
+    },
   },
-  maintainAspectRatio: false,
 };
 
 export const ChartWeather = ({
@@ -62,15 +85,33 @@ export const ChartWeather = ({
   dataChart,
   celsiusTemp,
 }: {
-  labels: string[];
-  dataChart: string[];
+  labels: number[];
+  dataChart: number[];
   celsiusTemp: string;
 }) => {
+  const uniqueLabels = labels
+    .map((value, index) => {
+      if ((index + 1) % 8 === 0) {
+        return value;
+      }
+      return undefined;
+    })
+    .filter((value) => value !== undefined);
+
+  const uniqueDataChart = dataChart
+    .map((value, index) => {
+      if ((index + 1) % 8 === 0) {
+        return value;
+      }
+      return undefined;
+    })
+    .filter((value) => value !== undefined);
+
   const data = {
-    labels: labels,
+    labels: uniqueLabels,
     datasets: [
       {
-        data: dataChart,
+        data: uniqueDataChart,
         fill: true,
         backgroundColor: `${Number(celsiusTemp) >= 0 ? 'rgba(255, 162, 91, 0.5)' : 'rgba(91, 140, 255, 0.5)'}`,
         borderColor: `${Number(celsiusTemp) >= 0 ? 'rgba(255, 162, 91, 1)' : 'rgba(91, 140, 255, 1)'}`,
@@ -80,8 +121,8 @@ export const ChartWeather = ({
   };
 
   return (
-    <div className="h-[94px] w-full">
-      <Line options={options} data={data} />
+    <div className="aspect-auto h-[94px] w-full">
+      <Line options={options as any} data={data} />
     </div>
   );
 };

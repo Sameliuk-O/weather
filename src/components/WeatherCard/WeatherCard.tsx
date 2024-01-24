@@ -33,13 +33,13 @@ export const WeatherCard = ({ weather }: { weather: IWeather }) => {
     const day = date.getDate().toString().padStart(2, '0');
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
 
-    return `${day}.${month}`;
+    return Number(`${day}.${month}`);
   });
 
   const dataChart = weather?.list.map((value) =>
     tempDisplay.temp === 'C'
-      ? kelvinToCelsius(value.main.temp).toFixed(0)
-      : kelvinToFahrenheit(value.main.temp).toFixed(0),
+      ? Number(kelvinToCelsius(value.main.temp).toFixed(0))
+      : Number(kelvinToFahrenheit(value.main.temp).toFixed(0)),
   );
   const handleDeleteCard = (id: number, city: string) => {
     weatherStore.deleteCityWeather(id);

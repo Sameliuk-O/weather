@@ -1,0 +1,1 @@
+export { OptionalWeatherInfo } from './OptionalWeatherInfo';

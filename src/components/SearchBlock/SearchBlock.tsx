@@ -35,7 +35,7 @@ export const SearchBlock = () => {
     setIsDropdownOpen(false);
   };
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     const uniqueCitiesSet = new Set([...arrayCity, city]);
@@ -43,17 +43,14 @@ export const SearchBlock = () => {
 
     localStorage.setItem('arrayCity', JSON.stringify(uniqueCitiesArray));
 
-    const fetchData = async () => {
-      try {
-        const weatherData = await getCityWeather(city);
-        weatherStore.setWeather(weatherData);
-        setCity('');
-      } catch (error) {
-        console.error('Error fetching weather data', error);
-      }
-    };
+    try {
+      const weatherData = await getCityWeather(city);
+      weatherStore.setWeather(weatherData);
+      setCity('');
+    } catch (error) {
+      console.error('Error fetching weather data', error);
+    }
 
-    fetchData();
     setIsDropdownOpen(false);
   };
 

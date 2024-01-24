@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import i18n from 'i18next';
 
-import LanguageImg from '../../image/material-language.svg';
-import ChevronDown from '../../image/chevron-down.svg';
-import ChevronUp from '../../image/chevron-up.svg';
+import LanguageImg from '../../images/material-language.svg';
+import ChevronDown from '../../images/chevron-down.svg';
+import ChevronUp from '../../images/chevron-up.svg';
 
 const language = [
   { title: 'EN', name: 'en' },

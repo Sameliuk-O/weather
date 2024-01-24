@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import weatherStore from '../../store/weatherStore';
+import { kelvinToCelsius, kelvinToFahrenheit } from '../../utils/convertTemp';
 import { humanizeTime } from '../../utils/humanizeTime';
 import { IWeather } from '../../utils/IWeather';
-import { kelvinToCelsius } from '../../utils/kelvinToCelsius';
-import { kelvinToFahrenheit } from '../../utils/kelvinToFahrenheit';
 import { ChartWeather } from '../ChartWeather';
 import { LocationInfo } from '../LocationInfo';
 import { OptionalWeatherInfo } from '../OptionalWeatherInfo';
@@ -41,7 +40,7 @@ export const WeatherCard = ({ weather }: { weather: IWeather }) => {
       : kelvinToFahrenheit(value.main.temp).toFixed(0),
   );
 
-  const deleteBlock = (id: number) => {
+  const handleDeleteCard = (id: number) => {
     weatherStore.deleteCityWeather(id);
   };
 
@@ -52,7 +51,7 @@ export const WeatherCard = ({ weather }: { weather: IWeather }) => {
     >
       <button
         className="float-right -mr-1.5 -mt-3.5 text-liteGray hover:text-gray"
-        onClick={() => deleteBlock(weather?.city.id)}
+        onClick={() => handleDeleteCard(weather?.city.id)}
       >
         x
       </button>

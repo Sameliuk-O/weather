@@ -2,9 +2,9 @@ import React from 'react';
 import { Translation } from 'react-i18next';
 
 interface IOptionalWeatherInfo {
-  wind: number | undefined;
-  humidity: number | undefined;
-  pressure: number | undefined;
+  wind?: number;
+  humidity?: number;
+  pressure?: number;
 }
 export const OptionalWeatherInfo = ({ wind, humidity, pressure }: IOptionalWeatherInfo) => {
   return (

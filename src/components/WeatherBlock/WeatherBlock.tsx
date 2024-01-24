@@ -23,13 +23,15 @@ export const WeatherBlock = observer(() => {
 
   useEffect(() => {
     weatherStore.setWeather(data);
+  }, [data]);
 
+  useEffect(() => {
     if (arrayCities) {
       arrayCities.map((el: string) => {
         fetchData(el);
       });
     }
-  }, [data]);
+  }, []);
 
   return (
     <div className="mt-[122px] flex flex-wrap justify-center gap-3.5">

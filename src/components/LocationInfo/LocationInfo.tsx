@@ -41,7 +41,6 @@ export const LocationInfo = ({
             alt={main}
           />
         </div>
-
         <span>{main}</span>
       </div>
     </div>

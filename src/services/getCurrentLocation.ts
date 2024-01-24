@@ -35,8 +35,5 @@ const fetchCurrentLocation = async () => {
 };
 
 export const useGetCurrentLocation = () => {
-  return useQuery('currentLocation', fetchCurrentLocation, {
-    // enabled: false,
-    // staleTime: Infinity,
-  });
+  return useQuery('currentLocation', fetchCurrentLocation);
 };

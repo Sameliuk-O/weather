@@ -4,6 +4,16 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          'Jost',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'sans-serif',
+        ],
+      },
       colors: {
         gray: 'rgba(175, 175, 175)',
         borderGray: 'rgba(112, 112, 112)',

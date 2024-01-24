@@ -2,7 +2,8 @@ import { useQuery } from 'react-query';
 import axios from 'axios';
 import { IWeather } from '../utils/IWeather';
 
-// const REACT_WEATHER_API_KEY = process.env.REACT_WEATHER_API_KEY;
+const REACT_APP_WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+
 interface IPosition {
   latitude: string;
   longitude: string;
@@ -11,7 +12,7 @@ interface IPosition {
 const fetchWeatherData = async ({ latitude, longitude }: IPosition) => {
   try {
     const resp: { data: IWeather } = await axios.get(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=cc5f0d67d7805534c20a71d92df9d658`,
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${REACT_APP_WEATHER_API_KEY}`,
     );
     return resp.data;
   } catch (error: any) {

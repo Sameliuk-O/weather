@@ -85,7 +85,7 @@ export const SearchBlock = () => {
             onClick={() => setIsDropdownOpen(true)}
             ref={inputRef}
           />
-          {isDropdownOpen && (
+          {isDropdownOpen && arrayCity.length > 0 && (
             <div className="absolute z-10 mt-2 max-h-40 w-[569px] overflow-y-scroll rounded border bg-white">
               {sortedCities.length === 0
                 ? arrayCity.map((city) => (

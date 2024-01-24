@@ -13,6 +13,9 @@ import { TempBlock } from '../TempBlock';
 export const WeatherCard = ({ weather }: { weather: IWeather }) => {
   const storedCity = localStorage.getItem(`${weather.city.name}`);
   const defaultLanguage = { city: weather.city.name, temp: 'C' };
+  const citiesStr = localStorage.getItem('arrayCity');
+  const citiesArray = citiesStr && JSON.parse(citiesStr);
+  console.log(citiesArray);
 
   const [tempDisplay, setTempDisplay] = useState(
     (storedCity && JSON.parse(storedCity)) || defaultLanguage,
@@ -39,9 +42,10 @@ export const WeatherCard = ({ weather }: { weather: IWeather }) => {
       ? kelvinToCelsius(value.main.temp).toFixed(0)
       : kelvinToFahrenheit(value.main.temp).toFixed(0),
   );
-
-  const handleDeleteCard = (id: number) => {
+  const handleDeleteCard = (id: number, city: string) => {
     weatherStore.deleteCityWeather(id);
+    const newCities = citiesArray.filter((el: string) => el !== city);
+    localStorage.setItem('arrayCity', JSON.stringify(newCities));
   };
 
   return (
@@ -51,7 +55,7 @@ export const WeatherCard = ({ weather }: { weather: IWeather }) => {
     >
       <button
         className="float-right -mr-1.5 -mt-3.5 text-liteGray hover:text-gray"
-        onClick={() => handleDeleteCard(weather?.city.id)}
+        onClick={() => handleDeleteCard(weather?.city.id, weather?.city.name)}
       >
         x
       </button>

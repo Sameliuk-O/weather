@@ -15,7 +15,6 @@ export const WeatherCard = ({ weather }: { weather: IWeather }) => {
   const defaultLanguage = { city: weather.city.name, temp: 'C' };
   const citiesStr = localStorage.getItem('arrayCity');
   const citiesArray = citiesStr && JSON.parse(citiesStr);
-  console.log(citiesArray);
 
   const [tempDisplay, setTempDisplay] = useState(
     (storedCity && JSON.parse(storedCity)) || defaultLanguage,

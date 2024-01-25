@@ -91,7 +91,7 @@ export const ChartWeather = ({
 }) => {
   const uniqueLabels = labels
     .map((value, index) => {
-      if ((index + 1) % 8 === 0) {
+      if (index % 8 === 0) {
         return value;
       }
       return undefined;
@@ -100,7 +100,7 @@ export const ChartWeather = ({
 
   const uniqueDataChart = dataChart
     .map((value, index) => {
-      if ((index + 1) % 8 === 0) {
+      if (index % 8 === 0) {
         return value;
       }
       return undefined;
